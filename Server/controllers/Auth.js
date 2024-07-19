@@ -2,6 +2,7 @@ const User = require("../models/User");
 const OTP = require("../models/OTP");
 const otpGenerator = require("otp-generator"); 
 //sendOTP
+
 exports.sendOTP = async (req,res) => {
     try{
         // fetch email from request body
@@ -10,7 +11,7 @@ exports.sendOTP = async (req,res) => {
         // check user is already present
         const checkUserPresent = await User.findOne({email});
 
-        //if user aleready exit, then return a responce
+        //if user aleready exist, then return a responce
         if(checkUserPresent){
             return res.status(401).json({
                 success:false,
@@ -59,7 +60,64 @@ exports.sendOTP = async (req,res) => {
     }
 }
 
+
+
 // signUp
+
+exports.signUp = async (req,res) => {
+    try{
+        // data fetch from req ki body 
+        const {
+            firstName,
+            lastName,
+            email,
+            password,
+            confirmPassword,
+            accountType,
+            contactNumber,
+        } = req.body;
+
+        // validation krlo
+        if(!firstName || !lastName || !email || !password || !confirmPassword || !contactNumber){
+            return res.status(403).json({
+                success: false,
+                message:"All fields are required"
+            })
+        }
+
+        // 2 password match krlo
+        if(password !== confirmPassword){
+            return res.status(400).json({
+              success:false,
+              message:"Password and ConfirmPassword Value does not match, please try again",  
+            })
+        }
+
+        // check user is already exist or not
+        const existingUser = await User.findOne({email});
+
+        if(existingUser){
+            return res.status(400).json({
+                success:false,
+                message:"User is alreday registered"
+            });
+        }
+
+        //Find the most recent OTP stored for User
+        
+        // validate OTP
+
+        // hash password
+
+        //create entry in db
+
+        // return res
+    }
+    catch(error){
+
+    }
+}
+
 
 //Login
 
