@@ -104,13 +104,35 @@ exports.signUp = async (req,res) => {
         }
 
         //Find the most recent OTP stored for User
+        const recentotp = await OTP.find({email}).sort({createdAt:-1}).limit(1);
         
         // validate OTP
+        if(recentotp.length == 0){
+            // return res
+            return res.status(400).json({
+                success:false,
+                message:"OTP Not Found"
+            })
+        } else if(otp !== recentotp){
+            return res.status(400).json({
+                success:false,
+                message:"Invalid OTP"
+            })
+        }
 
         // hash password
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         //create entry in db
-
+        const user = await User.create({
+            firstName,
+            lastName,
+            email,
+            password,
+            confirmPassword,
+            accountType,
+            additionalDetails,
+        })
         // return res
     }
     catch(error){
