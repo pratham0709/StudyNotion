@@ -31,12 +31,70 @@ exports.auth = async (req, res, next) => {
                 message:"token is invalid",
             })
         }
-
+        next();
     }
     catch(error){
         return res.status(400).json({
             success:false,
-            message:"Something went wrong while validating token",
+            message:"Something went wrong while validating the token",
+        })
+    }
+}
+
+//is Student
+exports.isStudent = async (req,res, next) => {
+    try{
+        if(req.user.accountType !== "Student"){
+            return res.status(401).json({
+                success:false,
+                message:"This is Protected Route for student only",
+            })
+        }
+        next();
+    }
+    catch(error){
+        return res.status(500).json({
+            success:false,
+            message:"User role cannot be verified, please try again",
+        })
+    }
+}
+
+// isInstructor
+exports.isInstructor = async (req,res, next) => {
+    try{
+        if(req.user.accountType !== "Instructor"){
+            return res.status(401).json({
+                success:false,
+                message:"This is Protected Route for instructor only",
+            })
+        }
+        next();
+    }
+    catch(error){
+        return res.status(500).json({
+            success:false,
+            message:"User role cannot be verified, please try again",
+        })
+    }
+}
+
+// isAdmin
+
+exports.isAdmin = async (req, res, next) => {
+    try{
+        if(req.user.accountType !== "Admin"){
+            return res.status(401).json({
+                success:false,
+                message:"This is Protected Route for Admin only"
+            })
+        }
+        next();
+    }
+    catch(error){
+        return res.status(500).json({
+            success:false,
+            message:"User role cannot be verified, please try again",
         })
     }
 }
