@@ -1,6 +1,9 @@
 const User = require("../models/User");
 const OTP = require("../models/OTP");
 const otpGenerator = require("otp-generator"); 
+const bcrypt = require("bcrypt");
+require("dotenv").config();
+
 //sendOTP
 
 exports.sendOTP = async (req,res) => {
@@ -75,6 +78,7 @@ exports.signUp = async (req,res) => {
             confirmPassword,
             accountType,
             contactNumber,
+            otp,
         } = req.body;
 
         // validation krlo
@@ -104,16 +108,16 @@ exports.signUp = async (req,res) => {
         }
 
         //Find the most recent OTP stored for User
-        const recentotp = await OTP.find({email}).sort({createdAt:-1}).limit(1);
+        const recentOtp = await OTP.find({email}).sort({createdAt:-1}).limit(1);
         
         // validate OTP
-        if(recentotp.length == 0){
+        if(recentOtp.length == 0){
             // return res
             return res.status(400).json({
                 success:false,
                 message:"OTP Not Found"
             })
-        } else if(otp !== recentotp){
+        } else if(otp !== recentOtp.otp){
             return res.status(400).json({
                 success:false,
                 message:"Invalid OTP"
@@ -124,6 +128,14 @@ exports.signUp = async (req,res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         //create entry in db
+
+        const profileDetails = await Profile.create({
+            gender:null,
+            dateOfBirth:null,
+            about:null,
+            contactNumber:null,
+        })
+
         const user = await User.create({
             firstName,
             lastName,
@@ -131,17 +143,108 @@ exports.signUp = async (req,res) => {
             contactNumber,
             password:hashedPassword,
             accountType,
-            additionalDetails,
+            additionalDetails:profileDetails._id,
+            image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`,
         })
         // return res
+        return res.status(200).json({
+            success:true,
+            message:"User is registered Successfully",
+            user,
+        })
     }
     catch(error){
-
+        console.log(error); 
+        return res.status(500).json({
+            success:false,
+            message:"User cannot be registered. Please try again"
+        })
     }
     
 }
 
 
 //Login
+exports.login = async (req,res) => {
+    try{    
+        // get data from req ki body
+        const {email, password} = req.body;
+
+        //validation data
+        if(!email || !password){
+            return res.status(403).json({
+                success:false,
+                message:"All fields required, please try again",
+            })
+        }
+        
+        //user check exist or not
+        const user = await User.findOne({email}).populate("additionalDetails");
+        if(!user){
+            return res.status(400).json({
+                success:false,
+                message:"User is not registered, please signup first",
+            })
+        }
+        
+        //generate JWT Token, after matching password
+        if(await bcrypt.compare(password, user.password)){
+            const payload = {
+                email: user.email,
+                id: user._id,
+                role: user.role
+            }
+
+            const token = jwt.sign(payload, process.env.JWT_SECRET, {
+                expiresIn:"2h",
+            });
+
+            user.token = token;
+            user.password = undefined;
+
+            //create cookie and send responce
+
+            const options = {
+                expiresIn: new Date(Date.now() + 3*24*60*60*1000),
+                httpOnly:true,
+            }
+
+            res.cookie("token", token, options).status(200).json({
+                success:true,
+                token,
+                user,
+                message:"Logged in Successfully",
+            })
+
+        }
+        else{
+            return res.status(401).json({
+                success:false,
+                message:"Password is incorrect",
+            })
+        }
+       
+
+    }
+    catch(error){
+        console.log(error);
+        return res.status(500).json({
+            success:false,
+            message:"Login Failure, please try again",
+        })
+    }
+}
+
 
 //changePassword    
+
+// TODO: Homework
+exports.changePassword = async (req, res) => {
+    // get data from req body
+    // get oldPassword, newPassword, confirmNewPassword
+    // validation
+
+    //update password in DB
+    // send mail - Password updated
+    // return responce
+}
