@@ -128,8 +128,8 @@ exports.signUp = async (req,res) => {
             firstName,
             lastName,
             email,
-            password,
-            confirmPassword,
+            contactNumber,
+            password:hashedPassword,
             accountType,
             additionalDetails,
         })
@@ -138,6 +138,7 @@ exports.signUp = async (req,res) => {
     catch(error){
 
     }
+    
 }
 
 
