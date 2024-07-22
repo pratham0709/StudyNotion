@@ -23,6 +23,8 @@ exports.sendOTP = async (req,res) => {
         }
 
         //generate OTP
+        // This code generates a 6-digit OTP (One-Time Password) using the otpGenerator library.
+        // The options specify that the OTP should only contain numeric digits (no uppercase letters, lowercase letters, or special characters).
         var otp = otpGenerator.generate(6, {
             upperCaseAlphabets:false,
             lowerCaseAlphabets:false,
@@ -30,6 +32,10 @@ exports.sendOTP = async (req,res) => {
         });
         console.log("OTP Generated", otp);
         
+
+        // The code checks if the generated OTP already exists in the database (OTP collection).
+        // If the OTP exists (result is not null), it generates a new OTP and checks again.
+        // This loop ensures that the OTP is unique and not already in use.
         let result = await OTP.findOne({otp: otp});
         
         while(result){
