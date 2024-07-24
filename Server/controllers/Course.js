@@ -1,7 +1,7 @@
 const Tag = require("../models/tags");
 const User = require("../models/User");
 const Course = require("../models/Course");
-const { response } = require("express");
+// const { response } = require("express");
 
 
 //createCourse handler function
@@ -25,6 +25,8 @@ exports.createCourse = async (req,res) => {
         const userId = req.user.id;
         const instructorDetails = await User.findById(userId);
         console.log("Instructor Details: " , instructorDetails);
+        //TODO: verify that userID and instructorDetails._id are same or different ?
+
 
         if(!instructorDetails){
             return res.status(401).json({
@@ -95,12 +97,16 @@ exports.createCourse = async (req,res) => {
 
 exports.showAllCourses = async (req,res) => {
     try{
-        const allCourses = await Course.find({}, {courseName:true,
-                                                  price:true,
-                                                  thumbnail:true,
-                                                  ratingAndReviews:true,
-                                                  instructor:true,
-                                                  studentEnrolled:true, }).populate("instructor").exec();
+       // TODO: change the below statement increamentally
+        const allCourses = await Course.find({});
+
+
+        // const allCourses = await Course.find({}, {courseName:true,
+        //                                           price:true,
+        //                                           thumbnail:true,
+        //                                           ratingAndReviews:true,
+        //                                           instructor:true,
+        //                                           studentEnrolled:true, }).populate("instructor").exec();
         
         return res.status(200).json({
             success:true,
