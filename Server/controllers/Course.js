@@ -72,7 +72,6 @@ exports.createCourse = async (req,res) => {
         // update the TAG ka schema
         // TODO HW
 
-
         // return response
         return res.status(200).json({
             success:true,

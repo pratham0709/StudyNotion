@@ -247,6 +247,7 @@ exports.login = async (req,res) => {
 // TODO: Homework
 exports.changePassword = async (req, res) => {
     // get data from req body
+    // const {password, confirmPassword}
     // get oldPassword, newPassword, confirmNewPassword
     // validation
 
