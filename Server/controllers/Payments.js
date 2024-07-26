@@ -129,7 +129,7 @@ exports.verifySignature = async (req,res) => {
             );
             console.log(enrolledStudent);
 
-            // amil send krna hai confirmation wala
+            // mail send krna hai confirmation wala
             const emailResponce = await mailSender(
                                         enrolledStudent.email,
                                         "Congratulation from CodeWithPratham",

@@ -50,6 +50,7 @@ exports.sendOTP = async (req,res) => {
         const otpPayload = {email, otp};
 
         // create an entry for OTP
+        //.create method means => save
         const otpBody = await OTP.create(otpPayload);
         console.log(otpBody);
 
@@ -195,7 +196,7 @@ exports.login = async (req,res) => {
         
         //generate JWT Token, after matching password
         if(await bcrypt.compare(password, user.password)){
-            const payload = {
+            const payoad = {
                 email: user.email,
                 id: user._id,
                 accountType: user.accountType,
