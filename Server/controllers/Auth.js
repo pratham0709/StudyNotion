@@ -196,7 +196,7 @@ exports.login = async (req,res) => {
         
         //generate JWT Token, after matching password
         if(await bcrypt.compare(password, user.password)){
-            const payoad = {
+            const payload = {
                 email: user.email,
                 id: user._id,
                 accountType: user.accountType,
