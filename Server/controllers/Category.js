@@ -1,5 +1,4 @@
 const Category = require("../models/Category");
-const Tag = require("../models/Category");
 
 // tag handler
 exports.createCategory = async (req,res) => {
@@ -16,7 +15,7 @@ exports.createCategory = async (req,res) => {
         }
 
         // create entry in db
-        const CategorysDetails = await Tag.create({
+        const CategorysDetails = await Category.create({
             name:name,
             description:description,
         })
@@ -45,7 +44,7 @@ exports.showAllCategories = async (req,res) => {
         return res.status(200).json({
             success:true,
             data:allCategories,
-            message:"All tags returned Successfully",
+            message:"All Categories returned Successfully",
         })
     }
     catch(error){
@@ -80,7 +79,7 @@ exports.categoryPageDetails = async (req, res) => {
         const differentCategories = await Category.find({
                                             _id:{$ne: categoryId}
                                             })
-                                            .populate("courses").exec()
+                                            .populate("courses").exec();
         //get top selling courses
         // HW: --> How to write it on own
 

@@ -1,6 +1,6 @@
 const RatingAndReview = require("../models/RatingAndReview");
 const Course = require("../models/Course");
-const { default: mongoose } = require("mongoose");
+const { mongo, default: mongoose } = require("mongoose");
 
 // create Rating
 exports.createRating = async (req,res) => {
@@ -12,7 +12,7 @@ exports.createRating = async (req,res) => {
         //check if user is already enrolled or not 
         const courseDetails = await Course.findOne({_id:courseId,
                                     studentEnrolled: {$elemMatch: {$eq: userId}}
-                            })
+                            });
         if(!courseDetails){
             return res.status(404).json({
                 success:false,
@@ -27,9 +27,9 @@ exports.createRating = async (req,res) => {
         })
 
         if(alreadyReviewed){
-            return res.status(400).json({
+            return res.status(403).json({
                 success:false,
-                message:"User is already reviewed by the user",
+                message:"Course is already reviewed by the user",
             })
         }
         

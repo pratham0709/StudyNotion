@@ -24,7 +24,8 @@ exports.resetPasswordToken = async (req,res) => {
                                                                 token:token, 
                                                                 resetPasswordExpires: Date.now() + 5*60*1000,
                                                             },
-                                                            {new:true})
+                                                            {new:true});
+        console.log("DETAILS", updateDetails);
         //create url
         const url = `http://localhost:3000/update-password/${token}`
 
@@ -53,7 +54,7 @@ exports.resetPasswordToken = async (req,res) => {
 
 // reset password
 
-exports.resetPassord = async (req, res) => {
+exports.resetPassword = async (req, res) => {
     try{
         //data fetch
         const {password, confirmPassword, token} = req.body;
@@ -103,6 +104,7 @@ exports.resetPassord = async (req, res) => {
     }
     catch(error){
         return res.status(401).json({
+            error:error.message,
             success:false,
             message:'Something went wrong, while sending reset password mail',
         })

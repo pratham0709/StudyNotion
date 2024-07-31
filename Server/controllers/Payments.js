@@ -32,7 +32,7 @@ exports.capturePayment = async (req,res) => {
             }
             // user already pay for same course
             const uid = new mongoose.Types.ObjectId(userId);
-            if(course.studentEnrolled.includes(uid)){
+            if(course.studentsEnrolled.includes(uid)){
                 return res.status(400).json({
                     success:false,
                     message:"Student is already enrolled",
@@ -133,7 +133,7 @@ exports.verifySignature = async (req,res) => {
             const emailResponce = await mailSender(
                                         enrolledStudent.email,
                                         "Congratulation from CodeWithPratham",
-                                        "Congratulations, you are onboarded into new CodeHelp Course"
+                                        "Congratulations, you are onboarded into new CodeWithPratham Course"
             );
             console.log(emailResponce);
             return res.status(200).json({

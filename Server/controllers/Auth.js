@@ -1,6 +1,10 @@
 const User = require("../models/User");
 const OTP = require("../models/OTP");
-const otpGenerator = require("otp-generator"); 
+const jwt = require("jsonwebtoken");
+const otpGenerator = require("otp-generator");
+const mailSender = require("../utils/mailSender");
+const { passwordUpdated } = require("../mail/templates/passwordUpdate");
+const Profile = require("../models/Profile"); 
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 
@@ -52,7 +56,7 @@ exports.sendOTP = async (req,res) => {
         // create an entry for OTP
         //.create method means => save
         const otpBody = await OTP.create(otpPayload);
-        console.log(otpBody);
+        console.log("OTP Body", otpBody);
 
         //return responce successfully
         res.status(200).json({
@@ -62,7 +66,7 @@ exports.sendOTP = async (req,res) => {
         })
     }
     catch(error){
-        console.log(error);
+        console.log(error.message);
         return res.status(500).json({
             success:false,
             message:error.message,
@@ -74,7 +78,7 @@ exports.sendOTP = async (req,res) => {
 
 // signUp
 
-exports.signUp = async (req,res) => {
+exports.signup = async (req,res) => {
     try{
         // data fetch from req ki body 
         const {
@@ -89,7 +93,7 @@ exports.signUp = async (req,res) => {
         } = req.body;
 
         // validation krlo
-        if(!firstName || !lastName || !email || !password || !confirmPassword || !contactNumber){
+        if(!firstName || !lastName || !email || !password || !confirmPassword || !otp){
             return res.status(403).json({
                 success: false,
                 message:"All fields are required"
@@ -110,13 +114,13 @@ exports.signUp = async (req,res) => {
         if(existingUser){
             return res.status(400).json({
                 success:false,
-                message:"User is alreday registered"
+                message:"User is alreday registered. Please sign in to continue."
             });
         }
 
         //Find the most recent OTP stored for User
         const recentOtp = await OTP.find({email}).sort({createdAt:-1}).limit(1);
-        
+        console.log(recentOtp);
         // validate OTP
         if(recentOtp.length == 0){
             // return res
@@ -124,7 +128,7 @@ exports.signUp = async (req,res) => {
                 success:false,
                 message:"OTP Not Found"
             })
-        } else if(otp !== recentOtp.otp){
+        } else if(otp !== recentOtp[0].otp){
             return res.status(400).json({
                 success:false,
                 message:"Invalid OTP"
@@ -133,6 +137,10 @@ exports.signUp = async (req,res) => {
 
         // hash password
         const hashedPassword = await bcrypt.hash(password, 10);
+
+        // create the user 
+        let approved =  "";
+        approved === "Instructor" ? (approved = false) : (approved = true);
 
         //create entry in db
 
@@ -149,19 +157,20 @@ exports.signUp = async (req,res) => {
             email,
             contactNumber,
             password:hashedPassword,
-            accountType,
+            accountType: accountType,
+            approved:approved,
             additionalDetails:profileDetails._id,
             image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`,
         })
         // return res
         return res.status(200).json({
             success:true,
-            message:"User is registered Successfully",
             user,
+            message:"User registered Successfully",
         })
     }
     catch(error){
-        console.log(error); 
+        console.error(error); 
         return res.status(500).json({
             success:false,
             message:"User cannot be registered. Please try again"
@@ -203,7 +212,7 @@ exports.login = async (req,res) => {
             }
 
             const token = jwt.sign(payload, process.env.JWT_SECRET, {
-                expiresIn:"2h",
+                expiresIn:"24h",
             });
 
             user.token = token;
@@ -234,7 +243,7 @@ exports.login = async (req,res) => {
 
     }
     catch(error){
-        console.log(error);
+        console.error(error);
         return res.status(500).json({
             success:false,
             message:"Login Failure, please try again",
@@ -247,13 +256,71 @@ exports.login = async (req,res) => {
 
 // TODO: Homework
 exports.changePassword = async (req, res) => {
-    // get data from req body
+    try{
+        // get data from req body
+    const userDetails = await User.findById(req.user.id);
     
-    // const {password, confirmPassword}
     // get oldPassword, newPassword, confirmNewPassword
-    // validation
+    const {oldPassword, newPassword, confirmPassword} = req.body;
 
+    // const {password, confirmPassword}
+    const isPasswordMatch = await bcrypt.compare(
+        oldPassword,
+        userDetails.password,
+    );
+
+    if(!isPasswordMatch){
+        return res.status(400).json({
+            success:false,
+            message:"The Passeord is incorrect",
+        })
+    }
+
+    // validation
+    if(newPassword !== confirmPassword){
+        return res.status(401).json({
+            success:false,
+            message:"The Password and confirm Password does not match",
+        })
+    }
     //update password in DB
+    const encryptedPassword = await bcrypt.hash(newPassword, 10);
+    const updatedUserDetails = await User.findByIdAndUpdate(
+        req.user.id,
+        {password: encryptedPassword},
+        {new:true},
+    );
+    
     // send mail - Password updated
+    try{
+        const emailResopnce = await mailSender(
+            updatedUserDetails.email,
+            passwordUpdated(
+                updatedUserDetails.email,
+                `Password Updated Sucessfully for ${updatedUserDetails.firstName} ${updatedUserDetails.lastName}`
+            )
+        );
+        console.log("Email Sent successfully:", emailResopnce.response);
+    }
+    catch(error){
+        console.error("Error occured while sending email:", error);
+        return res.status(500).json({
+            success:false,
+            message: "Error occurred while seding email:",
+            error:error.message,  
+        });
+    }
     // return responce
+    return res
+			.status(200)
+			.json({ success: true, message: "Password updated successfully" });
+    }
+    catch(error){
+        console.error("Error occurred while updating password:", error);
+		return res.status(500).json({
+			success: false,
+			message: "Error occurred while updating password",
+			error: error.message,
+		});
+    }    
 }
