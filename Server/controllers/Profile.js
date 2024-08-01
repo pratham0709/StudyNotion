@@ -53,6 +53,7 @@ exports.updateProfile = async (req, res) => {
 exports.deleteAccount = async (req,res) => {
     try{
         // get id
+        console.log("Printing Id", req.user.id);
         const id = req.user.id;
         // validation
         const userDetails = await User.findById(id);
@@ -68,7 +69,7 @@ exports.deleteAccount = async (req,res) => {
         
         // TODO: HW uneroll user from all enrolled courses
         //delete user
-        await userDetails.findByIdAndDelete({_id:id});
+        await User.findByIdAndDelete({_id:id});
 
         // return responce
         return res.status(200).json({
