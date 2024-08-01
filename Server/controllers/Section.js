@@ -7,7 +7,7 @@ exports.createSection = async (req, res) => {
         const { sectionName, courseId } = req.body;
 
         // validation perform
-        if(!sectionName || courseId){
+        if(!sectionName || !courseId){
             return res.status(400).json({
                 success:false,
                 message:"Mising Properties",

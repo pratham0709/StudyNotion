@@ -1,4 +1,4 @@
-const category = require("../models/Category");
+// const category = require("../models/Category");
 const User = require("../models/User");
 const Course = require("../models/Course");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
@@ -11,7 +11,7 @@ exports.createCourse = async (req,res) => {
     try{
         // fetch data
         const userId = req.user.id;
-        const {courseName, courseDescription, 
+        let {courseName, courseDescription, 
             whatYouWillLearn, price, tag, category, status, instructions} = req.body;
 
         // get the thumbnail
@@ -92,7 +92,7 @@ exports.createCourse = async (req,res) => {
         );
         
         // update the TAG ka schema
-        await category.findByIdAndUpdate(
+        await Category.findByIdAndUpdate(
             {_id: category},
             {
                 $push: {
