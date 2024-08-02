@@ -9,6 +9,8 @@ exports.createRating = async (req,res) => {
         const userId = req.user.id;
         // fetch the data from req ki body
         const {rating, review, courseId} =  req.body;
+        // console.log(userId);
+        // console,log()
         //check if user is already enrolled or not 
         const courseDetails = await Course.findOne({_id:courseId,
                                     studentEnrolled: {$elemMatch: {$eq: userId}}

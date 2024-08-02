@@ -62,7 +62,6 @@ exports.categoryPageDetails = async (req, res) => {
     try{
         // get categoryId
         const categoryId = req.body;
-
         //get courses for specified category id
         const selectedCategory = await Category.findById(categoryId)
                                                         .populate("courses").exec();
@@ -73,13 +72,13 @@ exports.categoryPageDetails = async (req, res) => {
                 message:"Data Not Found",
             })
         }
-
         // get courses for different category
 
         const differentCategories = await Category.find({
                                             _id:{$ne: categoryId}
                                             })
                                             .populate("courses").exec();
+        console.log(differentCategories);
         //get top selling courses
         // HW: --> How to write it on own
 
