@@ -5,6 +5,8 @@ import HighlightText from '../Components/Core/HomePage/HighlightText'
 import CTAButton from '../Components/Core/HomePage/Button'
 import Banner from '../assets/Images/banner.mp4'
 import CodeBlocks from '../Components/Core/HomePage/CodeBlocks'
+import TimelineSection from '../Components/TimelineSection'
+import LearningLanguageSection from '../Components/LearningLanguageSection'
 
 const Home = () => {
   return (
@@ -34,7 +36,7 @@ const Home = () => {
             
             <div className='flex flex-row gap-7 mt-8'>
                 <CTAButton active={true} linkto={"/signup"}>
-                    Learn More
+                        
                 </CTAButton>
 
                 <CTAButton active={false} linkto={"/login"}>
@@ -66,14 +68,14 @@ const Home = () => {
                     subheading={"Our courses are designed and taught by industry experts who have years of experience in coding and are passionate about sharing their knowledge with you."}
                     ctabtn1={
                         {
-                            btnText: "try it yourself",
+                            btnText: "Try it yourself",
                             linkto: "/signup",
                             active:true,
                         }
                     }
                     ctabtn2={
                         {
-                            btnText: "learn more",
+                            btnText: "Learn more",
                             linkto: "/login",
                             active:false,
                         }
@@ -83,7 +85,7 @@ const Home = () => {
                 />
             </div>
 
-             {/* Cose Section 2 */}
+             {/* Code Section 2 */}
              <div>
                 <CodeBlocks 
                     position={"lg:flex-row-reverse"}
@@ -103,7 +105,7 @@ const Home = () => {
                     }
                     ctabtn2={
                         {
-                            btnText: "learn more",
+                            btnText: "Learn more",
                             linkto: "/login",
                             active:false,
                         }
@@ -116,6 +118,57 @@ const Home = () => {
         </div>  
 
         {/* Section 2 */}
+        <div className='bg-pure-greys-5 text-richblack-700'>
+            <div className='homepage_bg h-[310px]'>
+                <div className='w-11/12 max-w-maxContent flex flex-col items-center gap-5 mx-auto justify-between'>
+                    <div className='h-[150px]'></div>
+                    <div className='flex flex-row gap-7 text-white'>
+                        <CTAButton active={true} linkto={"/signup"}>
+                            <div className='flex items-center gap-3'>
+                                Explore full Catalog
+                                <FaArrowRight />
+                            </div>
+                        </CTAButton>
+
+                        <CTAButton active={false} linkto={"/signup"}>
+                            <div>
+                                Learn more
+                            </div>
+                        </CTAButton>
+                    </div>
+                </div>
+
+                     
+            </div>
+
+            <div className='mx-auto w-11/12 max-w-maxContent flex flex-col items-center justify-between gap-7'>
+                    
+                    <div className='flex flex-row gap-7 justify-between mt-[95px] mb-10'>
+                        <div className='text-4xl font-semibold w-[45%]'>
+                            Get the skills you need for a 
+                            <HighlightText text={"job that is in demand"} />
+                        </div>
+
+                        <div className='flex flex-col gap-10 w-[40%] items-start'>
+                            <div className='text-[16px]'>
+                                The modern StudyNotion is the dictates its own terms. Today, to be a competitive specialist requires more than professional skills.
+                            </div>
+                            <CTAButton active={true} linkto={"/signup"} >
+                                <div>
+                                    Learn more
+                                </div>
+                            </CTAButton>
+                        </div>
+                    </div>
+
+                    <TimelineSection />
+
+                    <LearningLanguageSection />
+                                        
+            </div>
+
+
+        </div>
 
         {/* Section 3 */}
 
