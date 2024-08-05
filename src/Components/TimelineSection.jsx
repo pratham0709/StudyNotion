@@ -38,26 +38,40 @@ const TimelineSection = () => {
               timeline.map( (element, index) => { 
                   return (
                     <div className='flex flex-row gap-6' key={index}>
-                        <div className='w-[50px] h-[50px] bg-white flex items-center'>
-                          <img src={element.Logo} />
+                        <div className='w-[50px] h-[50px] bg-white flex items-center rounded-full justify-center'>
+                          <img src={element.Logo} alt='logoImage' />
                         </div>
 
                         <div>
                           <h2 className='font-semibold text-[18px]'>{element.heading}</h2>
                           <p className='text-base'>{element.Description}</p>
                         </div>
-
                     </div>
                   )
               })
             }
           </div>
 
-          <div className='relative shadow-blue-200'>
+          <div className='relative shadow-blue-200 m-5 p-6'>
             <img src={timelineImage} 
               alt='TimelineImage' 
               className=' object-cover h-fit shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]'
             />
+
+            <div className='bg-caribbeangreen-700 flex flex-row text-white uppercase
+            left-[50%] translate-x-[-50%] translate-y-[-50%] py-7 absolute'>
+               
+               <div className='flex flex-row items-center gap-5 border-r border-caribbeangreen-300 px-7'>
+                  <p className='text-3xl font-bold'>10</p>
+                  <p className='text-caribbeangreen-300 text-sm'>Years of Experience</p>
+               </div>
+
+                <div className='flex gap-5 items-center px-7'>
+                  <p className='text-3xl font-bold'>250</p>
+                  <p className='text-caribbeangreen-300 text-sm'>Type of Courses</p>
+                </div>
+
+            </div>
           </div>
         </div>
     </div>

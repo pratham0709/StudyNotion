@@ -7,6 +7,8 @@ import Banner from '../assets/Images/banner.mp4'
 import CodeBlocks from '../Components/Core/HomePage/CodeBlocks'
 import TimelineSection from '../Components/TimelineSection'
 import LearningLanguageSection from '../Components/LearningLanguageSection'
+import InstructorSection from '../Components/Core/HomePage/InstructorSection'
+import ExploreMore from '../Components/Core/HomePage/ExploreMore'
 
 const Home = () => {
   return (
@@ -36,7 +38,7 @@ const Home = () => {
             
             <div className='flex flex-row gap-7 mt-8'>
                 <CTAButton active={true} linkto={"/signup"}>
-                        
+                        Learn More
                 </CTAButton>
 
                 <CTAButton active={false} linkto={"/login"}>
@@ -114,7 +116,8 @@ const Home = () => {
                     codeColor={`text-yellow-25`}
                 />
             </div>
-
+            
+            <ExploreMore />
         </div>  
 
         {/* Section 2 */}
@@ -171,6 +174,14 @@ const Home = () => {
         </div>
 
         {/* Section 3 */}
+        <div className='w-11/12 mx-auto max-w-maxContent flex flex-col items-center justify-between gap-8 bg-richblack-900 
+        text-white'>
+            <InstructorSection />
+
+            <h2 className='text-center text-4xl font-semibold mt-10'>Review from other learners</h2>
+            
+            {/* Review Slider Here  */}
+        </div>
 
         {/* Footer */}
 
