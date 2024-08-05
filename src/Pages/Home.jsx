@@ -9,6 +9,7 @@ import TimelineSection from '../Components/TimelineSection'
 import LearningLanguageSection from '../Components/LearningLanguageSection'
 import InstructorSection from '../Components/Core/HomePage/InstructorSection'
 import ExploreMore from '../Components/Core/HomePage/ExploreMore'
+import Footer from '../Components/Core/HomePage/Footer'
 
 const Home = () => {
   return (
@@ -175,7 +176,7 @@ const Home = () => {
 
         {/* Section 3 */}
         <div className='w-11/12 mx-auto max-w-maxContent flex flex-col items-center justify-between gap-8 bg-richblack-900 
-        text-white'>
+        text-white mb-10'>
             <InstructorSection />
 
             <h2 className='text-center text-4xl font-semibold mt-10'>Review from other learners</h2>
@@ -184,7 +185,9 @@ const Home = () => {
         </div>
 
         {/* Footer */}
-
+        <div className='bg-[#161D29] text-[#424854] mt-13'>
+            <Footer />
+        </div>
     </div>
   )
 }
