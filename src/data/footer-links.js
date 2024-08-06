@@ -45,9 +45,6 @@ export const FooterLink1 = [
 ];
 
 
-
-
-
 export const FooterLink2 = [
   {
     title: "Subjects",

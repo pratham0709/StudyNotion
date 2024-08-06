@@ -21,6 +21,7 @@ const Footer = () => {
                     <img 
                         src={Logo}
                         className='w-[160px] h-[32px]'
+                        alt='LogoIMG'
                     />
                     <div className='font-inter'>
                         <p className='text-[#AFB2BF] font-semibold text-base'>Company</p>
@@ -30,7 +31,7 @@ const Footer = () => {
                                     return(
                                         <Link to={`${element.link}`}>
                                             <div className='flex flex-col cursor-pointer hover:text-[#AFB2BF] 
-                                            transition-all duration-200 mt-2 text-base'>
+                                            transition-all duration-200 mt-2 text-base' key={index}>
                                                 {element.title}
                                             </div>
                                         </Link>
@@ -57,7 +58,7 @@ const Footer = () => {
                                         return(
                                             <Link to={`${element.link}`}>
                                                 <div className='flex flex-col cursor-pointer hover:text-[#AFB2BF] 
-                                                transition-all duration-200 mt-2 text-base'>
+                                                transition-all duration-200 mt-2 text-base' key={index}>
                                                     {element.title}
                                                 </div>
                                             </Link>
@@ -98,7 +99,7 @@ const Footer = () => {
                                         return(
                                             <Link to={`${element.link}`}>
                                                 <div className='flex flex-col cursor-pointer hover:text-[#AFB2BF] 
-                                                transition-all duration-200 mt-2 text-base'>
+                                                transition-all duration-200 mt-2 text-base' key={index}>
                                                     {element.title}
                                                 </div>
                                             </Link>
@@ -166,7 +167,7 @@ const Footer = () => {
                         <p className='text-[#AFB2BF] font-semibold text-base'>Languages</p>
                         <div className='mt-2'>
                             {
-                                FooterLink1.find(item => item.title === "Languages").links.map((element, index) => {
+                                FooterLink2.find(item => item.title === "Languages").links.map((element, index) => {
                                     return(
                                         <Link to={`${element.link}`}>
                                             <div className='flex flex-col cursor-pointer hover:text-[#AFB2BF] 
@@ -185,10 +186,10 @@ const Footer = () => {
                 {/* div 3 */}
                 <div className='flex flex-col gap-5 ml-8'>
                     <div className='font-inter'>
-                        <p className='text-[#AFB2BF] font-semibold text-base'>Community</p>
+                        <p className='text-[#AFB2BF] font-semibold text-base'>Career building</p>
                         <div className='mt-2'>
                             {
-                                FooterLink1.find(item => item.title === "Community").links.map((element, index) => {
+                                FooterLink2.find(item => item.title === "Career building").links.map((element, index) => {
                                     return(
                                         <Link to={`${element.link}`}>
                                             <div className='flex flex-col cursor-pointer hover:text-[#AFB2BF] 
