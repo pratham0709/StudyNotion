@@ -47,7 +47,7 @@ const Footer = () => {
                 })}
               </div>
               <div className="flex gap-3 text-lg">
-                <FaFacebook className="hover:text-richblack-100 cursor-pointer" />
+                <FaFacebook className="hover:text-richblack-100 cursor-pointer"/>
                 <FaGoogle className="hover:text-richblack-100 cursor-pointer"/>
                 <FaTwitter className="hover:text-richblack-100 cursor-pointer"/>
                 <FaYoutube className="hover:text-richblack-100 cursor-pointer"/>
