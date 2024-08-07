@@ -1,217 +1,182 @@
-import React from 'react'
-import { FooterLink1 } from '../../../data/footer-links'
-import { FooterLink2 }from '../../../data/footer-links'
-import Logo from '../../../assets/Logo/Logo-Full-Light.png'
-import { Link } from 'react-router-dom'
-import { FaFacebook } from "react-icons/fa";
-import { FaTwitter } from "react-icons/fa";
-import { FaGoogle } from "react-icons/fa";
-import { FaYoutube } from "react-icons/fa";
+import React from "react";
+import { FooterLink2 } from "../../../data/footer-links";
+import { Link } from "react-router-dom";
+
+// Images
+import Logo from "../../../assets/Logo/Logo-Full-Light.png";
+
+// Icons
+import { FaFacebook, FaGoogle, FaTwitter, FaYoutube } from "react-icons/fa";
+
+const BottomFooter = ["Privacy Policy", "Cookie Policy", "Terms"];
+const Resources = [
+  "Articles",
+  "Blog",
+  "Chart Sheet",
+  "Code challenges",
+  "Docs",
+  "Projects",
+  "Videos",
+  "Workspaces",
+];
+const Plans = ["Paid memberships", "For students", "Business solutions"];
+const Community = ["Forums", "Chapters", "Events"];
 
 const Footer = () => {
-    // const title = FooterLink1[0].links.map(link => link.title)
   return (
-    <div className='w-11/12 mx-auto max-w-maxContent flex flex-col items-center justify-between'>
-        <div className='flex flex-row gap-20 w-full justify-center mt-12'>
-            {/* Left part */}
-            <div className='flex flex-row gap-12 w-[50%] '>
-
-                {/* div1 */}
-                <div className='flex flex-col gap-5'>
-                    <img 
-                        src={Logo}
-                        className='w-[160px] h-[32px]'
-                        alt='LogoIMG'
-                    />
-                    <div className='font-inter'>
-                        <p className='text-[#AFB2BF] font-semibold text-base'>Company</p>
-                        <div className='mt-3'>
-                            {
-                                FooterLink1.find(item => item.title === "Company").links.map((element, index) => {
-                                    return(
-                                        <Link to={`${element.link}`}>
-                                            <div className='flex flex-col cursor-pointer hover:text-[#AFB2BF] 
-                                            transition-all duration-200 mt-2 text-base' key={index}>
-                                                {element.title}
-                                            </div>
-                                        </Link>
-                                    )
-                                })
-                            }
-                        </div>
-                        <div className='flex flex-row gap-3 mt-4 cursor-pointer '>
-                            <FaFacebook className='hover:text-[#AFB2BF] transition-all duration-200 w-[20px] h-[20px]' />
-                            <FaGoogle className='hover:text-[#AFB2BF] transition-all duration-200 w-[20px] h-[20px]'/>
-                            <FaTwitter className='hover:text-[#AFB2BF] transition-all duration-200 w-[20px] h-[20px]'/>
-                            <FaYoutube  className='hover:text-[#AFB2BF] transition-all duration-200 w-[20px] h-[20px]'/>
-                        </div>
+    <div className="bg-richblack-800">
+      <div className="flex lg:flex-row gap-8 items-center justify-between w-11/12 max-w-maxContent text-richblack-400 leading-6 mx-auto relative py-14">
+        <div className="border-b w-[100%] flex flex-col lg:flex-row pb-5 border-richblack-700">
+          {/* Section 1 */}
+          <div className="lg:w-[50%] flex flex-wrap flex-row justify-between lg:border-r lg:border-richblack-700 pl-3 lg:pr-5 gap-3">
+            <div className="w-[30%] flex flex-col gap-3 lg:w-[30%] mb-7 lg:pl-0">
+              <img src={Logo} alt="" className="object-contain" />
+              <h1 className="text-richblack-50 font-semibold text-[16px]">
+                Company
+              </h1>
+              <div className="flex flex-col gap-2">
+                {["About", "Careers", "Affiliates"].map((ele, i) => {
+                  return (
+                    <div
+                      key={i}
+                      className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200"
+                    >
+                      <Link to={ele.toLowerCase()}>{ele}</Link>
                     </div>
-                </div>
-                
-                {/* div2 */}
-                <div className='flex flex-col gap-5'>
-                    <div className='font-inter'>
-                            <p className='text-[#AFB2BF] font-semibold text-base'>Resources</p>
-                            <div className='mt-2'>
-                                {
-                                    FooterLink1.find(item => item.title === "Resources").links.map((element, index) => {
-                                        return(
-                                            <Link to={`${element.link}`}>
-                                                <div className='flex flex-col cursor-pointer hover:text-[#AFB2BF] 
-                                                transition-all duration-200 mt-2 text-base' key={index}>
-                                                    {element.title}
-                                                </div>
-                                            </Link>
-                                        )
-                                    })
-                                }
-                            </div>
-
-                    </div>
-
-                    <div className='font-inter'>
-                        <p className='text-[#AFB2BF] font-semibold text-base'>Support</p>
-                        <div className='mt-2'>
-                            {
-                                FooterLink1.find(item => item.title === "Support").links.map((element, index) => {
-                                    return(
-                                        <Link to={`${element.link}`}>
-                                            <div className='flex flex-col cursor-pointer hover:text-[#AFB2BF] 
-                                            transition-all duration-200 mt-2 text-base' key={index}>
-                                                {element.title}
-                                            </div>
-                                        </Link>
-                                    )
-                                })
-                            }
-                        </div>
-
-                    </div>
-                </div>
-                
-                {/* div 3 */}
-                <div className='flex flex-col gap-5 ml-8'>
-                    <div className='font-inter'>
-                            <p className='text-[#AFB2BF] font-semibold text-base'>Plans</p>
-                            <div className='mt-2'>
-                                {
-                                    FooterLink1.find(item => item.title === "Plans").links.map((element, index) => {
-                                        return(
-                                            <Link to={`${element.link}`}>
-                                                <div className='flex flex-col cursor-pointer hover:text-[#AFB2BF] 
-                                                transition-all duration-200 mt-2 text-base' key={index}>
-                                                    {element.title}
-                                                </div>
-                                            </Link>
-                                        )
-                                    })
-                                }
-                            </div>
-
-                    </div>
-
-                    <div className='font-inter'>
-                        <p className='text-[#AFB2BF] font-semibold text-base'>Community</p>
-                        <div className='mt-2'>
-                            {
-                                FooterLink1.find(item => item.title === "Community").links.map((element, index) => {
-                                    return(
-                                        <Link to={`${element.link}`}>
-                                            <div className='flex flex-col cursor-pointer hover:text-[#AFB2BF] 
-                                            transition-all duration-200 mt-2 text-base' key={index}>
-                                                {element.title}
-                                            </div>
-                                        </Link>
-                                    )
-                                })
-                            }
-                        </div>
-
-                    </div>
-                </div>
-
-                {/* <div className='border-r-[1px] border-[#2C333F]'></div> */}
+                  );
+                })}
+              </div>
+              <div className="flex gap-3 text-lg">
+                <FaFacebook className="hover:text-richblack-100 cursor-pointer" />
+                <FaGoogle className="hover:text-richblack-100 cursor-pointer"/>
+                <FaTwitter className="hover:text-richblack-100 cursor-pointer"/>
+                <FaYoutube className="hover:text-richblack-100 cursor-pointer"/>
+              </div>
+              <div></div>
             </div>
 
-            {/* Right Part  */}
-            <div className='flex flex-row gap-12 w-[50%] '>
-                
-            <div className='border-l-[1px] border-[#2C333F]'></div>
-                {/* div1 */}
+            <div className="w-[48%] lg:w-[30%] mb-7 lg:pl-0">
+              <h1 className="text-richblack-50 font-semibold text-[16px]">
+                Resources
+              </h1>
 
-                <div className='flex flex-col gap-5'>
-
-                    <div className='font-inter'>
-                        <p className='text-[#AFB2BF] font-semibold text-base'>Subjects</p>
-                        <div className='mt-2'>
-                            {
-                                FooterLink2.find(item => item.title === "Subjects").links.map((element, index) => {
-                                    return(
-                                        <Link to={`${element.link}`}>
-                                            <div className='flex flex-col cursor-pointer hover:text-[#AFB2BF] 
-                                            transition-all duration-200 mt-2 text-base' key={index}>
-                                                {element.title}
-                                            </div>
-                                        </Link>
-                                    )
-                                })
-                            }
-                        </div>
-
+              <div className="flex flex-col gap-2 mt-2">
+                {Resources.map((ele, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200"
+                    >
+                      <Link to={ele.split(" ").join("-").toLowerCase()}>
+                        {ele}
+                      </Link>
                     </div>
-                </div>
-                
-                {/* div2 */}
-                <div className='flex flex-col gap-5 ml-8'>
-                    <div className='font-inter'>
-                        <p className='text-[#AFB2BF] font-semibold text-base'>Languages</p>
-                        <div className='mt-2'>
-                            {
-                                FooterLink2.find(item => item.title === "Languages").links.map((element, index) => {
-                                    return(
-                                        <Link to={`${element.link}`}>
-                                            <div className='flex flex-col cursor-pointer hover:text-[#AFB2BF] 
-                                            transition-all duration-200 mt-2 text-base' key={index}>
-                                                {element.title}
-                                            </div>
-                                        </Link>
-                                    )
-                                })
-                            }
-                        </div>
+                  );
+                })}
+              </div>
 
-                    </div>
-                </div>
-                
-                {/* div 3 */}
-                <div className='flex flex-col gap-5 ml-8'>
-                    <div className='font-inter'>
-                        <p className='text-[#AFB2BF] font-semibold text-base'>Career building</p>
-                        <div className='mt-2'>
-                            {
-                                FooterLink2.find(item => item.title === "Career building").links.map((element, index) => {
-                                    return(
-                                        <Link to={`${element.link}`}>
-                                            <div className='flex flex-col cursor-pointer hover:text-[#AFB2BF] 
-                                            transition-all duration-200 mt-2 text-base' key={index}>
-                                                {element.title}
-                                            </div>
-                                        </Link>
-                                    )
-                                })
-                            }
-                        </div>
-
-                    </div>
-                </div>
-
-                {/* <div className='border-r-[1px] border-[#2C333F]'></div> */}
+              <h1 className="text-richblack-50 font-semibold text-[16px] mt-7">
+                Support
+              </h1>
+              <div className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200 mt-2">
+                <Link to={"/help-center"}>Help Center</Link>
+              </div>
             </div>
+
+            <div className="w-[48%] lg:w-[30%] mb-7 lg:pl-0">
+              <h1 className="text-richblack-50 font-semibold text-[16px]">
+                Plans
+              </h1>
+
+              <div className="flex flex-col gap-2 mt-2">
+                {Plans.map((ele, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200"
+                    >
+                      <Link to={ele.split(" ").join("-").toLowerCase()}>
+                        {ele}
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
+              <h1 className="text-richblack-50 font-semibold text-[16px] mt-7">
+                Community
+              </h1>
+
+              <div className="flex flex-col gap-2 mt-2">
+                {Community.map((ele, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200"
+                    >
+                      <Link to={ele.split(" ").join("-").toLowerCase()}>
+                        {ele}
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* Section 2 */}
+          <div className="lg:w-[50%] flex flex-wrap flex-row justify-between pl-3 lg:pl-5 gap-3">
+            {FooterLink2.map((ele, i) => {
+              return (
+                <div key={i} className="w-[48%] lg:w-[30%] mb-7 lg:pl-0">
+                  <h1 className="text-richblack-50 font-semibold text-[16px]">
+                    {ele.title}
+                  </h1>
+                  <div className="flex flex-col gap-2 mt-2">
+                    {ele.links.map((link, index) => {
+                      return (
+                        <div
+                          key={index}
+                          className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200"
+                        >
+                          <Link to={link.link}>{link.title}</Link>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
+      </div>
 
-        <div></div>
+      <div className="flex flex-row items-center justify-between w-11/12 max-w-maxContent text-richblack-400 mx-auto  pb-14 text-sm">
+        {/* Section 1 */}
+        <div className="flex justify-between lg:items-start items-center flex-col lg:flex-row gap-3 w-full">
+          <div className="flex flex-row">
+            {BottomFooter.map((ele, i) => {
+              return (
+                <div
+                  key={i}
+                  className={` ${
+                    BottomFooter.length - 1 === i
+                      ? ""
+                      : "border-r border-richblack-700 cursor-pointer hover:text-richblack-50 transition-all duration-200"
+                  } px-3 `}
+                >
+                  <Link to={ele.split(" ").join("-").toLocaleLowerCase()}>
+                    {ele}
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="text-center">Made with ❤️ CodeWithPratham © 2024 Studynotion</div>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
