@@ -15,11 +15,10 @@ const subLinks = [
         link: "/catalog/python"
     },
     {
-        title: "web dev",
+        title: "Web Development",
         link: "/catalog/web-development"
     }
 ]
-
 const Navbar = () => {
 
     const {token} = useSelector( (state) => state.auth);
@@ -72,7 +71,7 @@ const Navbar = () => {
 
                                     <div className='invisible absolute left-[50%] top-[50%] bg-richblack-5 text-richblack-900
                                     rounded-md flex flex-col p-4 opacity-0 transition-all duration-200 group-hover:visible
-                                    group-hover:opacity-100 lg:w-[300px] translate-x-[-50%] translate-y-[80%]'>
+                                    group-hover:opacity-100 lg:w-[300px] translate-x-[-50%] translate-y-[25%] cursor-pointer'>
 
                                         <div className='absolute left-[50%] h-6 w-6 top-0 bg-richblack-5 rounded rotate-45
                                         translate-x-[80%] translate-y-[-45%]'>
@@ -82,7 +81,7 @@ const Navbar = () => {
                                                 subLinks.length ? (
                                                     subLinks.map((subLinks, index) => (
                                                         <Link to={`${subLinks.link}`} key={index}>
-                                                            <p>{subLinks.title}</p>
+                                                            <p className='p-3 text-[1rem]'>{subLinks.title} </p>
                                                         </Link>
                                                     ))
                                                 ) : (<div></div>)
