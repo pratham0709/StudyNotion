@@ -1,17 +1,17 @@
 import React from 'react'
 import Template from '../Components/Core/HomePage/Template'
-import SignupImg from '../assets/Images/signup.webp'
+import loginImg from '../assets/Images/login.webp'
 import frameImg from '../assets/Images/frame.png'
 
-const Signup = ({setIsLoggedIn}) => {
+const Login = ({setIsLoggedIn}) => {
   return (
     <div>
         <Template 
-            title="Join the millions learning to code with StudyNotion for free"
+            title="Welcome Back"
             desc1="Build skills for today, tomorrow, and beyond."
             desc2="Education to future-proof your career."
-            formType="Signup"
-            img1={SignupImg}
+            formType="login"
+            img1={loginImg}
             img2={frameImg}
             setIsLoggedIn={setIsLoggedIn}
         />
@@ -19,4 +19,4 @@ const Signup = ({setIsLoggedIn}) => {
   )
 }
 
-export default Signup
+export default Login

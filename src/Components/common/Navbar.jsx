@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import logo from '../../assets/Logo/Logo-Full-Light.png'
+import logo from '../../assets/Logo/Logo.svg'
 import { Link, matchPath, useLocation } from 'react-router-dom'
 import { NavbarLinks } from '../../data/navbar-links'
 import { useSelector } from 'react-redux'
@@ -48,7 +48,7 @@ const Navbar = () => {
     }
   return (
     <div className='flex justify-center h-14 items-center border-b-[1px] border-b-richblack-700'>
-        <div className='flex w-11/12 max-w-maxContent items-center justify-between'>
+        <div className='flex items-center justify-between w-11/12 max-w-maxContent'>
             <Link to="/">
                 <img 
                 src={logo} 
@@ -103,7 +103,7 @@ const Navbar = () => {
             </nav>
 
             {/* login/SignUp/Dashbord */}
-            <div className='flex gap-x-4 items-center'>
+            <div className='flex items-center gap-x-4'>
                 {
                     user && user?.accountType != "Instructor" && (
                         <Link to="/dashboard/cart" className='relative'>
