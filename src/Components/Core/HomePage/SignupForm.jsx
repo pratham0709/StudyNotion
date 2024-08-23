@@ -5,7 +5,6 @@ const SignupForm = ({setIsLoggedIn}) => {
 
   return (
     <form className='flex gap-2 mt-2 flex-w-full'>
-
         <div className={`${accountType}`}>
           <div>Student</div>
           <div>Instructor</div>
