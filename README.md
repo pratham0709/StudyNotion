@@ -1,1 +1,1 @@
-# STudyNotion
+# StudyNotion
