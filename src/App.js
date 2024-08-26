@@ -1,22 +1,37 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
-import Home from "./Pages/Home";
-import Navbar from "./Components/common/Navbar";
-import Signup from "./Pages/Signup"
-import { useState } from "react";
-import Login from "./Pages/Login";
+import {Route, Routes } from "react-router-dom";
+import Home from "./pages/Home"
+import Navbar from "./components/common/Navbar"
+import OpenRoute from "./components/core/Auth/OpenRoute"
+
+import Login from "./pages/Login"
+import Signup from "./pages/Signup"
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
-    <div className="flex flex-col w-screen min-h-screen bg-richblack-900 font-inter">
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
-        <Route path="/signup" element={<Signup setIsLoggedIn={setIsLoggedIn} />} />
-      </Routes>
-    </div>
+   <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
+    <Navbar/>
+    <Routes>
+      <Route path="/" element={<Home/>} />
+      <Route
+          path="signup"
+          element={
+            <OpenRoute>
+              <Signup />
+            </OpenRoute>
+          }
+        />
+    <Route
+          path="login"
+          element={
+            <OpenRoute>
+              <Login />
+            </OpenRoute>
+          }
+        />
+    </Routes>
+
+   </div>
   );
 }
 
