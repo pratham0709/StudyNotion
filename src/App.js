@@ -9,7 +9,7 @@ import Signup from "./pages/Signup"
 
 function App() {
   return (
-   <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
+   <div className="flex flex-col w-screen min-h-screen bg-richblack-900 font-inter">
     <Navbar/>
     <Routes>
       <Route path="/" element={<Home/>} />
