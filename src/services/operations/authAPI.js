@@ -169,34 +169,59 @@ export function getPasswordResetToken(email, setEmailSent) {
 }
 
 
+// export function resetPassword(password, confirmPassword, token, navigate) {
+//   return async (dispatch) => {
+//     const toastId = toast.loading("Loading...")
+//     dispatch(setLoading(true))
+//     try {
+//       const response = await apiConnector("POST", RESETPASSWORD_API, {
+//         password,
+//         confirmPassword,
+//         token,
+//       })
+
+//       console.log("RESETPASSWORD RESPONSE............", response)
+
+//       if (!response.data.success) {
+//         throw new Error(response.data.message)
+//       }
+
+//       toast.success("Password Reset Successfully")
+//       navigate("/login")
+//     } catch (error) {
+//       console.log("RESETPASSWORD ERROR............", error)
+//       toast.error("Failed To Reset Password")
+//     }
+//     toast.dismiss(toastId)
+//     dispatch(setLoading(false))
+//   }
+// }
+
 export function resetPassword(password, confirmPassword, token, navigate) {
-  return async (dispatch) => {
-    const toastId = toast.loading("Loading...")
-    dispatch(setLoading(true))
-    try {
-      const response = await apiConnector("POST", RESETPASSWORD_API, {
-        password,
-        confirmPassword,
-        token,
-      })
+  return async(dispatch) => {
+    const toastId = toast.loading("Loading....");
+    dispatch(setLoading(true));
 
-      console.log("RESETPASSWORD RESPONSE............", response)
+    try{
+      const responce = await apiConnector("POST", RESETPASSWORD_API, {password, confirmPassword, token});
 
-      if (!response.data.success) {
-        throw new Error(response.data.message)
+      console.log("RESETPASSWORD RESPONCE.......", responce);
+
+      if(!responce.data.success){
+        throw new Error(responce.data.message);
       }
 
       toast.success("Password Reset Successfully")
-      navigate("/login")
-    } catch (error) {
-      console.log("RESETPASSWORD ERROR............", error)
-      toast.error("Failed To Reset Password")
+      navigate("/login");
     }
-    toast.dismiss(toastId)
-    dispatch(setLoading(false))
+    catch(error){
+      console.log("RESETPASSWORD ERROR", error);
+      toast.error("Failed To Reset Password");
+    }
+    toast.dismiss(toastId);
+    dispatch(setLoading(false));
   }
 }
-
 export function logout(navigate) {
   return (dispatch) => {
     dispatch(setToken(null))

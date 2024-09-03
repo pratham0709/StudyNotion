@@ -58,13 +58,13 @@ const ForgotPassword = () => {
                             }
                         </button>
 
-                        <div>
-                            <Link to="/login">
-                                <p>Back to login</p>
-                            </Link>
-                        </div>
-
                     </form>
+
+                    <div>
+                        <Link to="/login">
+                            <p>Back to login</p>
+                        </Link>
+                    </div>
                 </div>
             )
         }
