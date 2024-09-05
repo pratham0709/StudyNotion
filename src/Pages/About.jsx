@@ -6,10 +6,12 @@ import BannerImg3 from '../assets/Images/aboutus3.webp'
 import Quate from '../components/core/AboutPage/Quate'
 import FoundingStory from '../assets/Images/FoundingStory.png'
 import StatsComponents from '../components/core/AboutPage/StatsComponents'
+import LearningGrid from '../components/core/AboutPage/LearningGrid'
+import ContactFormSection from '../components/core/AboutPage/ContactFormSection'
 
 const About = () => {
   return (
-    <div className='mt-[100px] text-white'>
+    <div className='mt-[100px] text-white w-11/12 max-w-maxContent mx-auto'>
         {/* Section 1 */}
         <section>
             <div>
@@ -85,8 +87,9 @@ const About = () => {
         <StatsComponents />
 
         {/* Section 5 */}
-        <section>
+        <section className='flex flex-col items-center justify-between gap-5 mx-auto'>
             <LearningGrid />
+            <ContactFormSection />
         </section>
     </div>
   )
