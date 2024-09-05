@@ -8,12 +8,14 @@ import FoundingStory from '../assets/Images/FoundingStory.png'
 import StatsComponents from '../components/core/AboutPage/StatsComponents'
 import LearningGrid from '../components/core/AboutPage/LearningGrid'
 import ContactFormSection from '../components/core/AboutPage/ContactFormSection'
+import Footer from '../components/common/Footer'
 
 const About = () => {
   return (
-    <div className='mt-[100px] text-white w-11/12 max-w-maxContent mx-auto'>
-        {/* Section 1 */}
-        <section>
+    <div className='mt-[100px] text-white '>
+       <div className='w-11/12 mx-auto max-w-maxContent'>
+         {/* Section 1 */}
+         <section>
             <div>
                 <header>Driving Innovation in Online Education for a 
                     <HighlightText text={"Brighter Future"} />
@@ -87,10 +89,21 @@ const About = () => {
         <StatsComponents />
 
         {/* Section 5 */}
-        <section className='flex flex-col items-center justify-between gap-5 mx-auto'>
+        <section className='flex flex-col items-center justify-between gap-5 mx-auto mb-[140px]'>
             <LearningGrid />
             <ContactFormSection />
         </section>
+
+        <section>
+            <div>
+                Review from other learners
+                {/* <ReviewSlider /> */}
+            </div>
+        </section>
+
+       </div>
+        <Footer />
+
     </div>
   )
 }
