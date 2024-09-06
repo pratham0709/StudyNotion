@@ -95,10 +95,13 @@ const About = () => {
         </section>
 
         <section>
-            <div>
-                Review from other learners
-                {/* <ReviewSlider /> */}
+        
+            <div className='flex w-full mt-8'>
+                <h1 className='flex items-center justify-center w-full text-4xl font-semibold text-richblack-5 font-inter'>
+                    Reviews From Other Learners
+                </h1>
             </div>
+            <div className='h-[150px]'></div>
         </section>
 
        </div>

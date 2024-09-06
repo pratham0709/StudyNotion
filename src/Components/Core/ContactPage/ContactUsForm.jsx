@@ -42,17 +42,21 @@ const ContactUsForm = () => {
     })
   return (
     <form onSubmit={handleSubmit(submitContactForm)}>
-        <div className='flex flex-col gap-14'>
-            <div className='flex gap-5'>
+        <div className='flex flex-col gap-8'>
+            <div className='flex justify-between w-full gap-5'>
             {/* FirstName  */}
-            <div className='flex flex-col'>
-                <label htmlFor='firstname'>First Name</label>
+            <div className='flex flex-col w-full'>
+                <label htmlFor='firstname' className='mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5'
+                >First Name</label>
                 <input 
                     type='text'
                     name='firstname'
                     id='firstname'
                     placeholder='Enter first name'
-                    className='text-black'
+                    style={{
+                        boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                    }}
+                    className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5"
                     {...register("firstname", {required:true})}
                 />
                 {
@@ -65,14 +69,19 @@ const ContactUsForm = () => {
             </div>
 
             {/* LastName */}
-            <div className='flex flex-col'>
-                <label htmlFor='lastname'>Last Name</label>
+            <div className='flex flex-col w-full'>
+                <label htmlFor='lastname'
+                    className='mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5'
+                >Last Name</label>
                 <input 
                     type='text'
                     name='lastname'
                     id='lastname'
                     placeholder='Enter Last name'
-                    className='text-black'
+                    style={{
+                        boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                    }}
+                    className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5"
                     {...register("lastname")}
                 />
             </div>
@@ -81,13 +90,18 @@ const ContactUsForm = () => {
             
             {/* email  */}
             <div className='flex flex-col'>
-                <label htmlFor='email'>Email Address</label>
+                <label htmlFor='email'
+                className='mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5'
+                >Email Address</label>
                 <input 
                     type='email'
                     name='email'
                     id='email'
                     placeholder='Enter email Address'
-                    className='text-black'
+                    style={{
+                        boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                    }}
+                    className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5"
                     {...register("email", {required:true})}
                 />
                 {
@@ -101,16 +115,21 @@ const ContactUsForm = () => {
 
             {/* Phone no  */}
             <div className='flex flex-col '>
-                <label htmlFor='phonenumber'>
+                <label htmlFor='phonenumber'
+                className='mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5'
+                >
                     Phone Number
                 </label>
-                <div className='flex flex-row gap-5 '>
+                <div className='flex flex-row items-center gap-5 '>
                     {/* dropdown */}
-                    <div className='flex flex-col gap-2 w-[80px]'>
+                    <div className='flex flex-col gap-2 w-[95px]'>
                         <select
                             name='dropdown'
                             id='dropdown'
-                            className='bg-yellow-50'
+                            style={{
+                                boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                            }}
+                            className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5"
                             {...register("contrycode", {required:true})}
                         >
                             {
@@ -125,13 +144,16 @@ const ContactUsForm = () => {
                         </select>
                     </div>
 
-                    <div className='flex flex-col w-[calc(100% - 90px)]'>
+                    <div className='flex flex-col w-full'>
                         <input 
                             type='number'
                             name='phonenumber'
                             id='phonenumber'
                             placeholder='12345 67890'
-                            className='text-black'
+                            style={{
+                                boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                            }}
+                            className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5"
                             {...register("phoneNo", 
                             {
                                 required:{value:true, message:"Please Enter Phone Number"}, 
@@ -152,15 +174,20 @@ const ContactUsForm = () => {
             </div>
 
             {/* message */}
-            <div>
-                <label htmlFor='message'>Message</label>
+            <div className='flex flex-col'>
+                <label htmlFor='message'
+                className='mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5'
+                >Message</label>
                 <textarea 
                     name='message'
                     id='message'
                     cols="30"
                     rows="7"
                     placeholder='Enter Your message here'
-                    className='text-black'
+                    style={{
+                                boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                            }}
+                    className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5"
                     {...register("message", {required:true})}
                 />
                 {
@@ -173,7 +200,7 @@ const ContactUsForm = () => {
             </div>
             
             <button type='submit'
-        className='px-6 text-center rounded-md bg-yellow-50 text-[16px] font-bold text-black'>
+            className='`text-center text-[15px] px-6 py-3 rounded-md font-bold bg-yellow-50 text-black hover:scale-95 transition-all duration-200'>
                 Send Message
             </button>
         </div>
