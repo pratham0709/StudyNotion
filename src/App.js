@@ -74,11 +74,11 @@ function App() {
        <Route 
           path="contact"
           element={
-            <OpenRoute>
               <ContactUs />
-            </OpenRoute>
           }
        />
+
+       {/* <Route path="dashbaord/my-profile" element={<MyProfile />} /> */}
     </Routes>
 
    </div>

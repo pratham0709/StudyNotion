@@ -31,7 +31,7 @@ const ContactUs = () => {
   return (
     <div className='text-white '>
         <div className='w-11/12 mx-auto mt-16 max-w-maxContent '>
-            <div className='flex gap-10'>
+            <div className='flex flex-col items-center justify-center gap-10 lg:items-start lg:flex-row'>
                 <div className='w-[490px] mt-3 bg-richblack-800 h-fit py-9 px-9 rounded-lg flex flex-col gap-12'>
                     {
                         data.map( (element, index) => (
