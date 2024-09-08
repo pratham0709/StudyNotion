@@ -11,8 +11,8 @@ const Sidebar = () => {
 
   const {user, loading: profileLoading} = useSelector((state) => state.profile);
   const {loading: authLoading} = useSelector((state) => state.auth);
-  const dispatch = useDispatch;
-  const navigate = useNavigate;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [ConfirmationModal, setConfirmationModal] = useState(null);
 
   if(authLoading || profileLoading){
@@ -24,7 +24,7 @@ const Sidebar = () => {
   }
 
   return (
-    <div className=''>
+    <div className='text-white'>
         <div className='flex min-w-[222px] flex-col border-r-[1px] border-r-richblack-700 h-[calc(100vh- 3.5rem)]
         bg-richblack-800 py-10'>
             <div className='flex flex-col'>

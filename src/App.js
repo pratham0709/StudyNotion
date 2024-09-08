@@ -11,6 +11,7 @@ import UpdatePassword from "./pages/UpdatePassword";
 import VerifyEmail from "./pages/VerifyEmail";
 import About from "./pages/About";
 import ContactUs from "./pages/ContactUs";
+import MyProfile from "./components/core/Dashboard/MyProfile";
 
 function App() {
   return (
@@ -78,7 +79,7 @@ function App() {
           }
        />
 
-       {/* <Route path="dashbaord/my-profile" element={<MyProfile />} /> */}
+       <Route path="dashboard/my-profile" element={<MyProfile />} />
     </Routes>
 
    </div>

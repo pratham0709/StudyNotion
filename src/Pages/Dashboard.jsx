@@ -6,6 +6,15 @@ import Sidebar from '../components/core/Dashboard/Sidebar';
 const Dashboard = () => {
     const {loading: authLoading} = useSelector( (state) => state.auth);
     const {loading: profileLoading} = useSelector( (state) => state.profile)
+    const {user} = useSelector((state) => state.profile);
+
+    if(user === null) {
+        return (
+            <div>
+                User is Null
+            </div>
+        )
+    }
 
     if(authLoading || profileLoading){
         return (

@@ -30,13 +30,13 @@ const Navbar = () => {
     const {totalItems} = useSelector( (state) => state.cart )
     const location = useLocation();
 
-    const [ssubLinks, setSsubLinks]  = useState([]);
+    const [subLinks, setSubLinks]  = useState([]);
 
     const fetchSublinks = async() => {
         try{
             const result = await apiConnector("GET", categories.CATEGORIES_API);
             console.log("Printing Sublinks result:" , result);
-            setSsubLinks(result.data.data);
+            setSubLinks(result.data.data);
         }
         catch(error) {
             console.log("Could not fetch the category list");
@@ -45,6 +45,7 @@ const Navbar = () => {
 
 
     useEffect( () => {
+        console.log("PRINTING TOKEN", token);
         fetchSublinks();
     },[] )
 
