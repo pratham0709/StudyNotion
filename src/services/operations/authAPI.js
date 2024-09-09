@@ -4,7 +4,7 @@ import { setLoading, setToken } from "../../slices/authSlice"
 import { resetCart } from "../../slices/cartSlice"
 import { setUser } from "../../slices/profileSlice"
 import { apiConnector } from "../apiconnector"
-import { endpoints } from "../apis"
+import { endpoints, settingsEndpoints } from "../apis"
 
 const {
   SENDOTP_API,
@@ -13,6 +13,8 @@ const {
   RESETPASSTOKEN_API,
   RESETPASSWORD_API,
 } = endpoints
+
+const { UPDATE_DISPLAY_PICTURE_API } = settingsEndpoints
 
 export function sendOtp(email, navigate) {
   return async (dispatch) => {
@@ -234,4 +236,15 @@ export function logout(navigate) {
     toast.success("Logged Out")
     navigate("/")
   }
+}
+
+export function updateDisplayPicture(){
+    return async(dispatch) => {
+      try{
+        
+      }
+      catch(error){
+
+      }
+    }
 }
