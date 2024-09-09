@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import SidebarLink from './SidebarLink'
 import { useNavigate } from 'react-router-dom'
 import { VscSignOut } from 'react-icons/vsc'
-
+import ConfirmationModal from '../../common/ConfirmationModal'
 
 const Sidebar = () => {
 
@@ -13,7 +13,7 @@ const Sidebar = () => {
   const {loading: authLoading} = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [ConfirmationModal, setConfirmationModal] = useState(null);
+  const [confirmationModal, setConfirmationModal] = useState(null);
 
   if(authLoading || profileLoading){
     return (
@@ -55,7 +55,6 @@ const Sidebar = () => {
                     btn1Handler : () => dispatch(logout(navigate)),
                     btn2Handler: () => setConfirmationModal(null),
                   })}
-
                   className='text-sm font-medium text-richblack-300'
                 >
                     <div className='flex flex-row items-center gap-x-2'>
@@ -67,7 +66,7 @@ const Sidebar = () => {
             </div>
         </div>
 
-        {ConfirmationModal && <ConfirmationModal  modalData={ConfirmationModal} />}
+        {confirmationModal && <ConfirmationModal  modalData={confirmationModal} />}
     </div>
   )
 }

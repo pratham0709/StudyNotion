@@ -8,7 +8,7 @@ const MyProfile = () => {
     const navigate = useNavigate();
 
   return (
-    <div className='text-white'>
+    <div className='w-full text-white'>
         <h1>My Profile</h1>
 
         {/* Section 1  */}
@@ -32,6 +32,65 @@ const MyProfile = () => {
                     navigate("dashboard/settings")
                 }}
             />
+        </div>
+
+        {/* Section 2  */}
+        <div>
+            <div>
+                <p>About</p>
+                <IconBtn text="Edit"  
+                    onClick={() => {
+                        navigate("dashboard/settings")
+                    }}
+                />
+            </div>
+
+            <p> {user?.additionalDetails.about  ?? "Write Something about Yourself"} </p>
+        </div>
+
+        {/* Section 3 */}
+
+        <div>
+            <div>
+                <p>Personal Details</p>
+                <IconBtn text="Edit"  
+                    onClick={() => {
+                        navigate("dashboard/settings")
+                    }}
+                />
+            </div>
+
+            <div>
+                <div>
+                    <p>First Name</p>
+                    <p> {user?.firstName} </p>
+                </div>
+
+                <div>
+                    <p>Email</p>
+                    <p> {user?.email} </p>
+                </div>
+
+                <div>
+                    <p>Gender</p>
+                    <p> {user?.additionalDetails?.gender ?? "Add Gender"} </p>
+                </div>
+
+                <div>
+                    <p>Last Name</p>
+                    <p> {user?.lastName} </p>
+                </div>
+
+                <div>
+                    <p>Phone Number</p>
+                    <p> {user?.additionalDetails?.contactNumber  ?? "Add Contact Number"} </p>
+                </div>
+
+                <div>
+                    <p>Date Of Birth</p>
+                    <p> {user?.additionalDetails?.dateOfBirth ?? "Add Date Of Birth"} </p>
+                </div>
+            </div>
         </div>
     </div>
   )
