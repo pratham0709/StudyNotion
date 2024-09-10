@@ -30,13 +30,13 @@ const Navbar = () => {
     const {totalItems} = useSelector( (state) => state.cart )
     const location = useLocation();
 
-    const [subLinks, setSubLinks]  = useState([]);
+    const [ssubLinks, setSsubLinks]  = useState([]);
 
     const fetchSublinks = async() => {
         try{
             const result = await apiConnector("GET", categories.CATEGORIES_API);
             console.log("Printing Sublinks result:" , result);
-            setSubLinks(result.data.data);
+            setSsubLinks(result.data.data);
         }
         catch(error) {
             console.log("Could not fetch the category list");

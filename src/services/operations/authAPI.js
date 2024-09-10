@@ -4,7 +4,7 @@ import { setLoading, setToken } from "../../slices/authSlice"
 import { resetCart } from "../../slices/cartSlice"
 import { setUser } from "../../slices/profileSlice"
 import { apiConnector } from "../apiconnector"
-import { endpoints, settingsEndpoints } from "../apis"
+import { endpoints } from "../apis"
 
 const {
   SENDOTP_API,
@@ -13,8 +13,6 @@ const {
   RESETPASSTOKEN_API,
   RESETPASSWORD_API,
 } = endpoints
-
-const { UPDATE_DISPLAY_PICTURE_API } = settingsEndpoints
 
 export function sendOtp(email, navigate) {
   return async (dispatch) => {
@@ -107,7 +105,7 @@ export function login(email, password, navigate) {
         ? response.data.user.image
         : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`
       dispatch(setUser({ ...response.data.user, image: userImage }))
-      console.log("After setUser", response.data.user);
+      
       localStorage.setItem("token", JSON.stringify(response.data.token))
       localStorage.setItem("user", JSON.stringify(response.data.user))
       navigate("/dashboard/my-profile")
@@ -120,112 +118,6 @@ export function login(email, password, navigate) {
   }
 }
 
-// export function getPasswordResetToken(email, setEmailSent) {
-//   return async (dispatch) => {
-//     const toastId = toast.loading("Loading...")
-//     dispatch(setLoading(true))
-//     try {
-//       const response = await apiConnector("POST", RESETPASSTOKEN_API, {
-//         email,
-//       })
-
-//       console.log("RESETPASSTOKEN RESPONSE............", response)
-
-//       if (!response.data.success) {
-//         throw new Error(response.data.message)
-//       }
-
-//       toast.success("Reset Email Sent")
-//       setEmailSent(true)
-//     } catch (error) {
-//       console.log("RESETPASSTOKEN ERROR............", error)
-//       toast.error("Failed To Send Reset Email")
-//     }
-//     toast.dismiss(toastId)
-//     dispatch(setLoading(false))
-//   }
-// }
-
-export function getPasswordResetToken(email, setEmailSent) {
-  return async(dispatch) => {
-    const toastId = toast.loading("Loading...")
-    dispatch(setLoading(true));
-
-    try{
-      const response = await apiConnector("POST", RESETPASSTOKEN_API, {email})
-      
-      console.log("RESET PASSWORD TOKEN RESPONSE.....", response);
-
-      if(!response.data.success){
-        throw new Error(response.data.message);
-      }
-      toast.success("Reset Email Sent");
-      setEmailSent(true);
-      
-    }
-    catch(error){
-      console.log("RESET PASSWORD TOKEN ERROR", error);
-      toast.error("Failed To Send Reset Email")
-    }
-    toast.dismiss(toastId)
-    dispatch(setLoading(false));
-  }
-}
-
-
-// export function resetPassword(password, confirmPassword, token, navigate) {
-//   return async (dispatch) => {
-//     const toastId = toast.loading("Loading...")
-//     dispatch(setLoading(true))
-//     try {
-//       const response = await apiConnector("POST", RESETPASSWORD_API, {
-//         password,
-//         confirmPassword,
-//         token,
-//       })
-
-//       console.log("RESETPASSWORD RESPONSE............", response)
-
-//       if (!response.data.success) {
-//         throw new Error(response.data.message)
-//       }
-
-//       toast.success("Password Reset Successfully")
-//       navigate("/login")
-//     } catch (error) {
-//       console.log("RESETPASSWORD ERROR............", error)
-//       toast.error("Failed To Reset Password")
-//     }
-//     toast.dismiss(toastId)
-//     dispatch(setLoading(false))
-//   }
-// }
-
-export function resetPassword(password, confirmPassword, token, navigate) {
-  return async(dispatch) => {
-    const toastId = toast.loading("Loading....");
-    dispatch(setLoading(true));
-
-    try{
-      const responce = await apiConnector("POST", RESETPASSWORD_API, {password, confirmPassword, token});
-
-      console.log("RESETPASSWORD RESPONCE.......", responce);
-
-      if(!responce.data.success){
-        throw new Error(responce.data.message);
-      }
-
-      toast.success("Password Reset Successfully")
-      navigate("/login");
-    }
-    catch(error){
-      console.log("RESETPASSWORD ERROR", error);
-      toast.error("Failed To Reset Password");
-    }
-    toast.dismiss(toastId);
-    dispatch(setLoading(false));
-  }
-}
 export function logout(navigate) {
   return (dispatch) => {
     dispatch(setToken(null))
@@ -238,13 +130,50 @@ export function logout(navigate) {
   }
 }
 
-export function updateDisplayPicture(){
-    return async(dispatch) => {
-      try{
-        
-      }
-      catch(error){
 
+
+export function getPasswordResetToken(email , setEmailSent) {
+  return async(dispatch) => {
+    dispatch(setLoading(true));
+    try{
+      const response = await apiConnector("POST", RESETPASSTOKEN_API, {email,})
+
+      console.log("RESET PASSWORD TOKEN RESPONSE....", response);
+
+      if(!response.data.success) {
+        throw new Error(response.data.message);
       }
+
+      toast.success("Reset Email Sent");
+      setEmailSent(true);
     }
+    catch(error) {
+      console.log("RESET PASSWORD TOKEN Error", error);
+      toast.error("Failed to send email for resetting password");
+    }
+    dispatch(setLoading(false));
+  }
+}
+
+export function resetPassword(password, confirmPassword, token) {
+  return async(dispatch) => {
+    dispatch(setLoading(true));
+    try{
+      const response = await apiConnector("POST", RESETPASSWORD_API, {password, confirmPassword, token});
+
+      console.log("RESET Password RESPONSE ... ", response);
+
+
+      if(!response.data.success) {
+        throw new Error(response.data.message);
+      }
+
+      toast.success("Password has been reset successfully");
+    }
+    catch(error) {
+      console.log("RESET PASSWORD TOKEN Error", error);
+      toast.error("Unable to reset password");
+    }
+    dispatch(setLoading(false));
+  }
 }
